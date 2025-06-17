@@ -1,8 +1,26 @@
-import { DataTypes, Model } from 'sequelize';
+import { DataTypes, Model, Optional } from 'sequelize';
 import { sequelize } from '../config/db';
 
-export class Product extends Model {}
+interface ProductAttributes {
+  id: string;
+  name: string;
+  stock: number;
+  price: number;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
 
+type ProductCreationAttributes = Optional<ProductAttributes, 'id'>;
+
+export class Product extends Model<ProductAttributes, ProductCreationAttributes>
+  implements ProductAttributes {
+  public id!: string;
+  public name!: string;
+  public stock!: number;
+  public price!: number;
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
+}
 Product.init(
   {
     id: {
