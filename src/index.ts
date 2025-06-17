@@ -1,26 +1,24 @@
-import express from 'express';
-import dotenv from 'dotenv';
+import app from './app';
 import { sequelize, testDbConnection } from './config/db';
+import { loadModels } from './utils/loadModels';
 
-dotenv.config();
-
-const app = express();
-app.use(express.json());
-
-const PORT = process.env.PORT;
-
-app.get('/', (_re1, res) => {
-  res.send('Flash Sale API runnning...');
-});
+const PORT = process.env.PORT || 4000;
 
 const startServer = async () => {
-  await testDbConnection();
+  try {
+    await testDbConnection();
+    loadModels();
 
-  await sequelize.sync({ alter: true });
+    await sequelize.sync({ alter: true });
+    console.log('✅ Database synced');
 
-  app.listen(PORT, () => {
-    console.log(`🚀 Server is running on port ${PORT}`);
-  });
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running at http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error('❌ Server failed to start:', error);
+    process.exit(1);
+  }
 };
 
 startServer();
