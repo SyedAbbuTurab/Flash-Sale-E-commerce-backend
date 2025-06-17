@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import { sequelize } from './config/db';
+import { sequelize, testDbConnection } from './config/db';
 
 dotenv.config();
 
@@ -13,8 +13,14 @@ app.get('/', (_re1, res) => {
   res.send('Flash Sale API runnning...');
 });
 
-sequelize.sync({ alter: true }).then(() => {
+const startServer = async () => {
+  await testDbConnection();
+
+  await sequelize.sync({ alter: true });
+
   app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`🚀 Server is running on port ${PORT}`);
   });
-});
+};
+
+startServer();
