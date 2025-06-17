@@ -1,16 +1,18 @@
-import { Sequelize } from "sequelize";
+import { Sequelize } from 'sequelize';
 
 export const sequelize = new Sequelize(
-    process.env.DB_NAME as string,
-    process.env.DB_USER as string,
-    process.env.DB_PASSWORD,
-    {
-        host: process.env.HOST,
-        port: Number(process.env.PORT),
-        dialect: 'postgres',
-        logging: false
-    }
-)
+  'flash_sale', // DB name
+  'postgres', // DB user
+  'Test@123',
+  {
+    host: process.env.HOST,
+    port: Number(process.env.PORT),
+    dialect: 'postgres',
+    logging: false,
+  },
+);
+
+console.log('Password from env:', process.env.DB_PASS);
 
 // Optional: check connection immediately
 export const testDbConnection = async () => {
