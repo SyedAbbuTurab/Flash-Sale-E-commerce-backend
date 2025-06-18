@@ -23,6 +23,7 @@ export const purchaseProduct = async (req: Request, res: Response) => {
     if (!session) {
       await t.rollback();
       res.status(400).json({ error: 'No active flash sale for this product' });
+      return;
     }
 
     const product = await Product.findOne({
@@ -49,6 +50,7 @@ export const purchaseProduct = async (req: Request, res: Response) => {
     if (existingOrder) {
       await t.rollback();
       res.status(409).json({ message: 'You already purchased this product' });
+      return;
     }
     // 4. Deduct stock
     product.stock -= 1;
@@ -65,5 +67,6 @@ export const purchaseProduct = async (req: Request, res: Response) => {
     await t.rollback();
     console.error('Purchase error:', error);
     res.status(500).json({ error: 'Purchase failed', details: error });
+    return;
   }
 };
