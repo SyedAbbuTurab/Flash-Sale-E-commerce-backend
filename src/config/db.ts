@@ -9,6 +9,12 @@ export const sequelize = new Sequelize(
     port: Number(process.env.PORT),
     dialect: 'postgres',
     logging: false,
+    pool: {
+      max: 20,     // increase from default 5
+      min: 0,
+      acquire: 30000,
+      idle: 10000
+    }
   },
 );
 
