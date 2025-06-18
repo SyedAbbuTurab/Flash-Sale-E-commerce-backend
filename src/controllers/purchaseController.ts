@@ -8,6 +8,11 @@ import { Order } from '../models/Order';
 export const purchaseProduct = async (req: Request, res: Response) => {
   const { productId, userId } = req.body;
 
+  if (!userId || !productId) {
+    res.status(400).json({ error: 'Missing userId or productId in request body' });
+    return;
+}
+
   const t = await sequelize.transaction();
 
   try {
