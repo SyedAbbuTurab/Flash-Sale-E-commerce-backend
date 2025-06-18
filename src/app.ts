@@ -12,6 +12,13 @@ app.use(express.json());
 app.get('/', (_req, res) => {
   res.send('Flash Sale API running 🚀');
 });
+app.use((req, res, next) => {
+  res.setTimeout(5000, () => {
+    console.warn(`⏱️ Request timed out: ${req.method} ${req.url}`);
+    res.status(503).json({ error: 'Request timed out' });
+  });
+  next();
+});
 
 app.use("/users", userRoutes);
 app.use("/products", producRoutes);
