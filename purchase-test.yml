@@ -1,0 +1,30 @@
+config:
+  target: "http://localhost:4000"
+  phases:
+    - duration: 15
+      arrivalRate: 10
+
+  plugins:
+    faker:
+      variables:
+        userId: "datatype.uuid"
+
+scenarios:
+  - name: Flash Sale Purchase Test
+    flow:
+      - function: "setUserId"
+      - post:
+          url: "/purchase"
+          headers:
+            Content-Type: "application/json"
+          json:
+            userId: "{{ $userId }}"
+            productId: "3fcabbca-3994-481c-be12-f4e0a23a458b"
+
+# Define a JS function to assign Faker variable to context
+processor:
+  setUserId: |
+    function (context, events, done) {
+      context.vars.userId = context.vars.userId || this.faker.datatype.uuid();
+      return done();
+    }

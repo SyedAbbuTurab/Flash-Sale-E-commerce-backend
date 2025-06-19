@@ -6,6 +6,7 @@ import { Product } from '../models/Product';
 import { Order } from '../models/Order';
 
 export const purchaseProduct = async (req: Request, res: Response) => {
+    console.log("Received purchase attempt:", req.body);
   const { productId, userId } = req.body;
 
   if (!userId || !productId) {
