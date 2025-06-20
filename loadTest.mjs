@@ -4,7 +4,11 @@ import { v4 as uuidv4 } from "uuid";
 const TARGET_URL = "http://localhost:4000/purchase";
 const PRODUCT_ID = "3fcabbca-3994-481c-be12-f4e0a23a458b";
 
-const USERS = 50; // Number of concurrent requests
+const USERS = 20; // Number of concurrent requests
+let success = 0;
+let failed = 0;
+let startTime = Date.now();
+
 
 async function sendPurchaseRequest() {
   const userId = uuidv4();
@@ -12,15 +16,10 @@ async function sendPurchaseRequest() {
     const response = await axios.post(TARGET_URL, {
       userId,
       productId: PRODUCT_ID,
-    }, {
-      headers: {
-        "Content-Type": "application/json"
-      }
     });
-
-    console.log(`✅ Success: ${response.status}`);
-  } catch (err) {
-    console.error(`❌ Failed: ${err.response?.status || err.message}`);
+    success++;
+  } catch {
+    failed++;
   }
 }
 
@@ -31,7 +30,11 @@ async function runLoadTest() {
   }
 
   await Promise.all(requests);
-  console.log(`\n🔁 Load test completed with ${USERS} requests.\n`);
+  const duration = (Date.now() - startTime) / 1000;
+  console.log(`\n✅ Success: ${success}`);
+  console.log(`❌ Failed: ${failed}`);
+  console.log(`⏱️ Total time: ${duration}s`);
+  console.log(`📈 RPS: ${(success + failed) / duration}\n`);
 }
 
 runLoadTest();
