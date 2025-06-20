@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 const TARGET_URL = "http://localhost:4000/purchase";
 const PRODUCT_ID = "3fcabbca-3994-481c-be12-f4e0a23a458b";
 
-const USERS = 20; // Number of concurrent requests
+const USERS = 100; // Number of concurrent requests
 let success = 0;
 let failed = 0;
 let startTime = Date.now();
@@ -26,10 +26,12 @@ async function sendPurchaseRequest() {
 async function runLoadTest() {
   const requests = [];
   for (let i = 0; i < USERS; i++) {
-    requests.push(sendPurchaseRequest());
+    setTimeout(() => {
+      sendPurchaseRequest();
+    }, i * 50); // spread 100 users over 5 seconds
   }
 
-  await Promise.all(requests);
+  // await Promise.all(requests);
   const duration = (Date.now() - startTime) / 1000;
   console.log(`\n✅ Success: ${success}`);
   console.log(`❌ Failed: ${failed}`);
