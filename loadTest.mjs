@@ -27,11 +27,11 @@ async function runLoadTest() {
   const requests = [];
   for (let i = 0; i < USERS; i++) {
     setTimeout(() => {
-      sendPurchaseRequest();
+      requests.push(sendPurchaseRequest());
     }, i * 50); // spread 100 users over 5 seconds
   }
 
-  // await Promise.all(requests);
+  await Promise.all(requests);
   const duration = (Date.now() - startTime) / 1000;
   console.log(`\n✅ Success: ${success}`);
   console.log(`❌ Failed: ${failed}`);
