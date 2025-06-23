@@ -1,6 +1,7 @@
 import app from './app';
 import { sequelize, testDbConnection } from './config/db';
 import { loadModels } from './utils/loadModels';
+import { startConsumer } from './queue/consumer';
 
 const PORT = process.env.PORT || 4000;
 
@@ -13,7 +14,12 @@ const startServer = async () => {
     console.log('✅ Database synced');
 
     app.listen(PORT, () => {
-      console.log(`🚀 Server running at http://localhost:${PORT}`);
+      console.log(`🚀 Server listening on port ${PORT}`);
+
+      // Run consumer without blocking the server
+      startConsumer().catch((err) => {
+        console.error('❌ Redis consumer failed to start:', err);
+      });
     });
   } catch (error) {
     console.error('❌ Server failed to start:', error);
