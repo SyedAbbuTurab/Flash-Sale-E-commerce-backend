@@ -8,6 +8,6 @@ export const queuePurchaseRequest = async (payload: any) => {
   } catch (err) {
     console.error('❌ Failed to enqueue:', err);
   } finally {
-    redis.disconnect(); // Optional: only disconnect if this script exits
+    redis.disconnect(); 
   }
 };
