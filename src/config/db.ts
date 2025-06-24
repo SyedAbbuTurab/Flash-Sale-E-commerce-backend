@@ -20,7 +20,6 @@ export const sequelize = new Sequelize(
 
 console.log('Password from env:', process.env.DB_PASS);
 
-// Optional: check connection immediately
 export const testDbConnection = async () => {
   try {
     await sequelize.authenticate();
