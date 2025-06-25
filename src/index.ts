@@ -15,11 +15,7 @@ const startServer = async () => {
 
     app.listen(PORT, () => {
       console.log(`🚀 Server listening on port ${PORT}`);
-
-      // Run consumer without blocking the server
-      startConsumer().catch((err) => {
-        console.error('❌ Redis consumer failed to start:', err);
-      });
+      startConsumer(); // 🔁 Don’t await — run it in background
     });
   } catch (error) {
     console.error('❌ Server failed to start:', error);
