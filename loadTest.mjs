@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 const TARGET_URL = "http://localhost:4000/purchase";
 const PRODUCT_ID = "3fcabbca-3994-481c-be12-f4e0a23a458b";
 
-const USERS = 1;
+const USERS = 5;
 const SPREAD_INTERVAL_MS = 30;
 
 let success = 0;
