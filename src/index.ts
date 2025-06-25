@@ -15,7 +15,9 @@ const startServer = async () => {
 
     app.listen(PORT, () => {
       console.log(`🚀 Server listening on port ${PORT}`);
-      startConsumer(); // 🔁 Don’t await — run it in background
+      // ✅ don't block main thread
+      startConsumer().catch((err) => console.error('❌ Consumer crashed:', err));
+      // 🔁 Don’t await — run it in background
     });
   } catch (error) {
     console.error('❌ Server failed to start:', error);
