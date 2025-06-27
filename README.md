@@ -28,10 +28,16 @@ A robust backend queue system to handle high-load flash sale purchases using Red
 ## 📦 Setup Instructions
 
 ### 1. Clone the Repo
-
-```bash
 git clone https://github.com/yourname/flash-sale-backend.git
 cd flash-sale-backend
-2. Install Dependencies
+
+### 2. Install Dependencies
 npm install
-3. Configure Environment
+
+### 3. Configure Environment
+DATABASE_URL=postgres://user:password@localhost:5432/yourdb
+REDIS_URL=redis://localhost:6379
+PORT=4000
+
+```bash
+
