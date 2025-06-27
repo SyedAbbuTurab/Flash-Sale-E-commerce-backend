@@ -29,7 +29,7 @@ async function sendPurchaseRequest(i) {
     const duration = Date.now() - start;
     durations.push(duration);
     failed++;
-    console.log(`❌ [${i}] ${error?.response?.status || 'Error'} (${duration}ms)`);
+    console.log(`[${i}] ${error?.response?.status || 'Error'} (${duration}ms)`);
   }
 }
 
