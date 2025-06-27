@@ -11,7 +11,7 @@ const startServer = async () => {
     loadModels();
 
     await sequelize.sync({ alter: true });
-    console.log('✅ Database synced');
+    console.log('Database synced');
 
     app.listen(PORT, () => {
       console.log(`🚀 Server listening on port ${PORT}`);
