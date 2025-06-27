@@ -20,7 +20,7 @@ const startServer = async () => {
       // 🔁 Don’t await — run it in background
     });
   } catch (error) {
-    console.error('❌ Server failed to start:', error);
+    console.error('Server failed to start:', error);
     process.exit(1);
   }
 };
