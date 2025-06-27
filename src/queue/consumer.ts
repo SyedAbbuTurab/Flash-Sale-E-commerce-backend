@@ -20,8 +20,8 @@ export const startConsumer = async () => {
       console.error('❌ Error in consumer loop:', err);
     }
 
-    setTimeout(consume, 100); // keep polling
+    setTimeout(consume, 100); 
   };
 
-  consume(); // start
+  consume(); 
 };
