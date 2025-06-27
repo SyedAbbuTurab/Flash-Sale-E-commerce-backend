@@ -41,5 +41,9 @@ PORT=4000
 
 ### 4. Start Server (Windows)
 npm run dev
+
+🧪 Load Testing Script
+ts-node src/utils/loadTest.ts
+
 ```bash
 
