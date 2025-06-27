@@ -24,7 +24,7 @@ async function sendPurchaseRequest(i) {
     const duration = Date.now() - start;
     durations.push(duration);
     success++;
-    console.log(`✅ [${i}] ${response.status} (${duration}ms)`);
+    console.log(`[${i}] ${response.status} (${duration}ms)`);
   } catch (error) {
     const duration = Date.now() - start;
     durations.push(duration);
