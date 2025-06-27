@@ -32,3 +32,6 @@ A robust backend queue system to handle high-load flash sale purchases using Red
 ```bash
 git clone https://github.com/yourname/flash-sale-backend.git
 cd flash-sale-backend
+2. Install Dependencies
+npm install
+3. Configure Environment
