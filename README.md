@@ -39,5 +39,7 @@ DATABASE_URL=postgres://user:password@localhost:5432/yourdb
 REDIS_URL=redis://localhost:6379
 PORT=4000
 
+### 4. Start Server (Windows)
+npm run dev
 ```bash
 
